@@ -7,7 +7,7 @@ const productRouter = require("./routes/productRoutes");
 const app = express();
 
 app.use(express.json());
-app.use("/product", productRouter);
+app.use("/products", productRouter);
 
 dotenv.config({ path: ".env" });
 
