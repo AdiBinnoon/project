@@ -16,6 +16,13 @@ const productSchema = new mongoose.Schema(
       min: 1,
     },
 
+    images: {
+      type: [String],
+      default: [
+        "https://i.pinimg.com/originals/96/af/7b/96af7babdccc560c51f6837524472408.jpg",
+      ],
+    },
+
     description: {
       type: String,
       required: [true, "you must enter a product name"],
@@ -35,7 +42,6 @@ const productSchema = new mongoose.Schema(
       enum: ["small", "medium", "large"],
       default: "medium",
     },
-    images: [String],
   },
   {
     toJSON: { virtuals: true },
