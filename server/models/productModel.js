@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema(
   {
-    name: {
+    model: {
       type: String,
-      required: [true, "you must enter a product name"],
+      required: [true, "you must enter a product model"],
       trim: true,
       maxlength: [20, "name can't be longer than 20"],
       unique: true,
@@ -34,13 +34,18 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       default: "general",
-      enum: ["MTB", "Road", "e-mtb", "general"],
+      enum: ["MTB", "Road", "e-mtb", "general", "Accessories"],
+    },
+
+    brand: {
+      type: String,
+      enum: ["Trek", "Santa Cruz", "specialized", "YT", "Yeti"],
     },
 
     size: {
       type: String,
       enum: ["small", "medium", "large"],
-      default: "medium",
+      required: [true, "please enter size"],
     },
   },
   {
