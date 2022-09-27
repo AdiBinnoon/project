@@ -55,5 +55,12 @@ const productSchema = new mongoose.Schema(
   }
 );
 
+productSchema.virtual("reviews", {
+  localField: "_id",
+  foreignField: "product",
+  ref: "reviews",
+});
+
+
 const Product = mongoose.model("products", productSchema);
 module.exports = Product;
