@@ -8,6 +8,6 @@ router
   .route("/:productId")
   .all(reviewController.checkIfProductExist)
   .post(reviewController.createNewReview)
-  .get(reviewController.getReviewById);
+  // .get(reviewController.getReviewById);
 
 module.exports = router;

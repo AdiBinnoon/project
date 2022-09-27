@@ -32,13 +32,4 @@ module.exports.createNewReview = async (req, res) => {
   }
 };
 
-module.exports.getReviewById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const review = await Review.findById(id).populate("users");
-    if (!review) throw new Error("id does not exist");
-    sendRes(res, review, 200);
-  } catch (err) {
-    sendRes(res, err, 400, true);
-  }
-};
+
