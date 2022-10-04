@@ -1,23 +1,16 @@
 const mongoose = require("mongoose");
 
-const productOrder = new mongoose.Schema({
-  product: {
-    type: mongoose.Schema.ObjectId,
-    ref: "products",
-    required: true,
-  },
-
-  amount: {
-    type: Number,
-    required: true,
-  },
-});
-
 const orderSchema = new mongoose.Schema(
   {
     date: {
       type: Date,
       default: Date.now(),
+    },
+
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "users",
+      required: true,
     },
 
     products: [
@@ -35,19 +28,13 @@ const orderSchema = new mongoose.Schema(
             validator: function (val) {
               val = String(val);
               return !val.includes(".");
+              //   return val === Math.floor(val)
             },
             message: "amount can't be less float",
           },
         },
-        required: true,
       },
     ],
-
-    buyer: {
-      type: mongoose.Schema.ObjectId,
-      ref: "users",
-      required: true,
-    },
   },
   {
     toJSON: { virtuals: true },
