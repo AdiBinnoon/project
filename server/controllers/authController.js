@@ -51,7 +51,8 @@ module.exports.autheticateUser = async (req, res, next) => {
     const { token } = req.cookies;
     if (!token) throw new Error("please login to continue");
     const { id, exp } = jwt.verify(token, process.env.JWT_SECRET);
-    if (Date.now() > exp) throw new Error("login expired please login again");
+    if (Date.now() / 1000 > exp)
+      throw new Error("login expired please login again");
     const user = await User.findById(id);
     if (!user) throw new Error("invalid user please login again");
     req.user = user;
