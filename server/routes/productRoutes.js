@@ -5,17 +5,28 @@ const authController = require("../controllers/authController");
 
 const router = express.Router();
 
-router.use(authController.autheticateUser);
+const { roles } = authController;
 
 router
   .route("/")
   .get(productController.getAllProducts)
-  .post(productController.createNewProduct);
+  .post(
+    authController.autheticateUser,
+    authController.restrict(roles.editor),
+    productController.createNewProduct
+  );
+
+router.use(productController.checkValidId);
+
+router.route("/:id").get(productController.getProductById);
+
+router.use(
+  authController.autheticateUser,
+  authController.restrict(roles.editor)
+);
 
 router
   .route("/:id")
-  .all(productController.checkValidId)
-  .get(productController.getProductById)
   .delete(productController.delProductById)
   .put(productController.updateProduct);
 

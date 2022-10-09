@@ -17,12 +17,12 @@ module.exports.checkIfProductExist = async (req, res, next) => {
 
 module.exports.createNewReview = async (req, res) => {
   try {
-    const { title, description, stars, reviewer } = req.body;
+    const { title, description, stars } = req.body;
     const review = await Review.create({
       title,
       description,
       stars,
-      reviewer,
+      reviewer: req.user.id,
       //   product: req.product._id
       product: req.params.productId,
     });
@@ -31,5 +31,3 @@ module.exports.createNewReview = async (req, res) => {
     sendRes(res, err, 400, true);
   }
 };
-
-
